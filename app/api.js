@@ -16,7 +16,6 @@ const languageCode = "&language=en-US"
 
 //Most popular by region
 export const fetchPopularMovies = (region) => {
-    console.log("This is the fetch pop movies url:", `${discoverMovieUrl}&watch_region=${region}`)
     return axios({
         url: `${discoverMovieUrl}&watch_region=${region}`,
         method: 'GET'
@@ -25,6 +24,7 @@ export const fetchPopularMovies = (region) => {
 
 //By ID
 export const fetchMovieById = (id) => {
+    console.log(`This is the fetch movie url ${showMovieUrl}${id}${apiKey}${languageCode}`)
     return axios({
         url: `${showMovieUrl}${id}${apiKey}${languageCode}`,
         method: 'GET'

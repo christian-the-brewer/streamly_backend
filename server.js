@@ -13,11 +13,13 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(movie_routes)
 
-app.get("/movies", (req, res) => {
-    res.status(200).send({
-        movie: "jaws",
-    })
-})
+// app.get("/movies", (req, res) => {
+//     res.status(200).send({
+//         movie: "jaws",
+//     })
+// })
+
+
 
 app.listen(PORT, () => {
     console.log(`server online on ${PORT}`)

@@ -11,14 +11,23 @@ const router = express.Router();
 
 router.get('/movies/:region', (req, res, next) => {
     //fetch top 20 most popular movies from API
-    console.log("hit movies/region")
-    console.log(req.params.region)
     fetchPopularMovies(req.params.region)
         .then((movies) => {
             res.status(201).json({ movies: movies.data.results })
 
         })
         .catch(next)
+})
+
+router.get("/movie/:id", (req, res, next)=> {
+    //api call to fetch movie data by id
+    console.log(req.params)
+    console.log(req.params.id)
+    fetchMovieById(req.params.id)
+        .then((movie)=> {
+            console.log("movie: ",movie)
+            res.status(201).json({movie: movie.data})
+        }) .catch(next)
 })
 
 export default router
