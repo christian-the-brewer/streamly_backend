@@ -21,11 +21,8 @@ router.get('/movies/:region', (req, res, next) => {
 
 router.get("/movie/:id", (req, res, next)=> {
     //api call to fetch movie data by id
-    console.log(req.params)
-    console.log(req.params.id)
     fetchMovieById(req.params.id)
         .then((movie)=> {
-            console.log("movie: ",movie)
             res.status(201).json({movie: movie.data})
         }) .catch(next)
 })

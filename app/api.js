@@ -24,7 +24,6 @@ export const fetchPopularMovies = (region) => {
 
 //By ID
 export const fetchMovieById = (id) => {
-    console.log(`This is the fetch movie url ${showMovieUrl}${id}${apiKey}${languageCode}`)
     return axios({
         url: `${showMovieUrl}${id}${apiKey}${languageCode}`,
         method: 'GET'
