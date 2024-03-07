@@ -23,6 +23,7 @@ router.get("/movie/:id", (req, res, next)=> {
     //api call to fetch movie data by id
     fetchMovieById(req.params.id)
         .then((movie)=> {
+
             res.status(201).json({movie: movie.data})
         }) .catch(next)
 })
