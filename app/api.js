@@ -56,9 +56,18 @@ export const fetchMovieById = (id) => {
 
 //Search movies
 //Search by title
-export const searchMoviesByTitle = (title) => {
+export const fetchSearchMoviesByTitle = (title) => {
     return axios({
         url: `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&language=en-US&page=1`,
+        method: "GET",
+        headers: headers,
+    })
+};
+
+//multisearch that will be the default in navbar. searches movies and shows and people
+export const fetchSearchMulti = (term) => {
+    return axios({
+        url: `https://api.themoviedb.org/3/search/multi?query=${term}&include_adult=false&language=en-US&page=1`,
         method: "GET",
         headers: headers,
     })
