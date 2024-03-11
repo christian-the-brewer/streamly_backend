@@ -1,6 +1,7 @@
 import express from "express";
 import movie_routes from "./app/routes/movie_routes.js";
 import "dotenv/config"
+import {fetchWatchProviders} from "./app/api.js";
 
 
 const app = express();
@@ -12,13 +13,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 app.use(movie_routes)
-
-// app.get("/movies", (req, res) => {
-//     res.status(200).send({
-//         movie: "jaws",
-//     })
-// })
-
 
 
 app.listen(PORT, () => {

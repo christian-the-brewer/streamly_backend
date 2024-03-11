@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
-import { fetchPopularMovies, fetchMovieById } from "../api.js"
+import {fetchPopularMovies, fetchMovieById, fetchPopularMoviesByPlatform} from "../api.js"
+import {watchProviders} from "../watch_providers.js";
 
 const router = express.Router();
 
@@ -19,6 +20,17 @@ router.get('/movies/:region', (req, res, next) => {
         .catch(next)
 })
 
+//Get movies by platform
+router.get("/movies/:region/:id", (req, res, next) => {
+    //fetch top 20 movies by platform
+    const platformID = watchProviders[req.params.id]
+    console.log("movieroutes platformId: ",platformID)
+    fetchPopularMoviesByPlatform(req.params.region, platformID)
+        .then((movies)=> res.status(201).json({movies: movies.data.results}))
+        .catch(next)
+});
+
+//Show route
 router.get("/movie/:id", (req, res, next)=> {
     //api call to fetch movie data by id
     fetchMovieById(req.params.id)
