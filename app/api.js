@@ -64,6 +64,16 @@ export const fetchSearchMoviesByTitle = (title) => {
     })
 };
 
+//Fetch TV
+
+export const fetchPopularTV = (region) => {
+    return axios({
+        url: `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc&watch_region=${region}`,
+        method: "GET",
+        headers: headers,
+    })
+};
+
 //multisearch that will be the default in navbar. searches movies and shows and people
 export const fetchSearchMulti = (term) => {
     return axios({
@@ -85,3 +95,6 @@ export const fetchWatchProviders = () => {
         }
     })
 };
+
+
+//
