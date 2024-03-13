@@ -38,13 +38,14 @@ export const fetchPopularMovies = (region) => {
 //     })
 // };
 
-export const fetchPopularMoviesByPlatform = (region,platform) => {
+export const fetchPopularMoviesByPlatform = (region, platform) => {
     return axios({
         url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&region=${region}&sort_by=popularity.desc&watch_region=${region}&with_watch_providers=${platform}'`,
-        method:"GET",
+        method: "GET",
         headers: headers,
     })
 }
+
 
 //By ID
 export const fetchMovieById = (id) => {
@@ -74,6 +75,15 @@ export const fetchPopularTV = (region) => {
     })
 };
 
+//fetch tv by region and platform
+export const fetchPopularTVByPlatform = (region, platform) => {
+    return axios({
+        url: `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc&watch_region=${region}&with_watch_providers=${platform}`,
+        method: "GET",
+        headers: headers,
+    })
+};
+
 export const fetchTVById = (id) => {
     return axios({
         url: `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
@@ -91,6 +101,14 @@ export const fetchSearchMulti = (term) => {
     })
 };
 
+//fetch person by id
+export const fetchPersonById = (id) => {
+    return axios({
+        url: `https://api.themoviedb.org/3/person/${id}?language=en-US`,
+        method: "GET",
+        headers: headers,
+    })
+};
 
 //Fetch list of watch provider
 export const fetchWatchProviders = () => {
