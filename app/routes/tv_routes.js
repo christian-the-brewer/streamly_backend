@@ -1,6 +1,6 @@
 import express from "express";
 import {watchProviders} from "../watch_providers.js";
-import {fetchPopularTV} from "../api.js";
+import {fetchPopularTV, fetchTVById} from "../api.js";
 
 const router = express.Router();
 
@@ -16,5 +16,15 @@ router.get("/tv/:region", (req, res, next)=>{
             res.status(201).json({shows: shows.data.results})
         }).catch(next);
 })
+
+//get single show
+router.get("/tv/show/:id", (req, res, next) => {
+    //fetch details about movie
+    fetchTVById(req.params.id)
+        .then((show) => {
+            res.status(201).json({show: show.data})
+        }).catch(next);
+
+});
 
 export default router

@@ -74,6 +74,14 @@ export const fetchPopularTV = (region) => {
     })
 };
 
+export const fetchTVById = (id) => {
+    return axios({
+        url: `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
+        method: "GET",
+        headers: headers,
+    })
+};
+
 //multisearch that will be the default in navbar. searches movies and shows and people
 export const fetchSearchMulti = (term) => {
     return axios({
