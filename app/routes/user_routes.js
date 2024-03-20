@@ -49,7 +49,8 @@ router.post("/login", async (req, res, next) => {
                 const giveToken = await db.query(
                     "UPDATE users SET refresh_token = $1 WHERE email = $2", [refreshToken, email]
                 )
-                res.status(201).json({success: "user logged in"})
+                res.cookie("jwt", refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
+                res.status(201).json({accessToken});
             } else res.status(401).json({message: "Invalid"})
         } else {
             res.status(401).json({message: "Invalid"})
