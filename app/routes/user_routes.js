@@ -28,7 +28,7 @@ router.post("/login", async (req, res, next) => {
         const user = await db.query(
             "SELECT * FROM users WHERE email = $1", [email]
         )
-        if (user.rowCount !== 0) {
+        if (user.rowCount === 1) {
             const match = await bcrypt.compare(password, user.rows[0].hashed_password);
             if (match) {
                 //JWT

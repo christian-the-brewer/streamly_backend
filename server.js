@@ -6,7 +6,7 @@ import tv_routes from "./app/routes/tv_routes.js"
 import person_routes from "./app/routes/person_routes.js";
 import user_routes from "./app/routes/user_routes.js";
 import "dotenv/config"
-import {db} from "./db.js"
+import verifyJWT from "./app/middleware/verifyJWT.js";
 
 
 const app = express();
@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+
 
 app.use(movie_routes)
 app.use(shared_routes)
