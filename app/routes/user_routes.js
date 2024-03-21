@@ -10,12 +10,24 @@ const router = express.Router();
 //register new user route
 router.post("/register", async (req, res, next) => {
     try {
+        //take credentials from request and add to database
         const { email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         if (!email || !password) return res.status(400);
-        const newUser = await db.query(
-            "INSERT INTO users (email, hashed_password) VALUES ($1, $2) RETURNING *", [email, hashedPassword])
-        res.status(201).json(newUser.rows[0]);
+        //check if email is already registered in db
+        const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+        //if the query returns a user record then return message and status saying so and urge user to sign in
+        if (user.rowCount === 1) {
+            res.status(409).json({message: "Email already in use, sign in!"})
+        } else {
+            //add new user into db
+            const newUser = await db.query(
+                "INSERT INTO users (email, hashed_password) VALUES ($1, $2) RETURNING *", [email, hashedPassword]);
+            //create a watch list for this user in the db
+            const watchList = await db.query(
+                "INSERT INTO watch_lists (user_id) VALUES ($1) RETURNING *", [newUser.rows[0].user_id]);
+            res.status(201).json(newUser.rows[0]);
+        }
     } catch (err) {
         console.error(err.message)
     }
