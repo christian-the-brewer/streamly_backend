@@ -7,6 +7,7 @@ import person_routes from "./app/routes/person_routes.js";
 import user_routes from "./app/routes/user_routes.js";
 import "dotenv/config"
 import verifyJWT from "./app/middleware/verifyJWT.js";
+import watch_list_routes from "./app/routes/watch_list_routes.js";
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(shared_routes)
 app.use(tv_routes)
 app.use(person_routes);
 app.use(user_routes)
+app.use(watch_list_routes);
 
 app.listen(PORT, () => {
     console.log(`server online on ${PORT}`)

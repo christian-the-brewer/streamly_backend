@@ -25,8 +25,8 @@ export const db = new Pool({
 //creates watch_list table
 // CREATE TABLE watch_list (
 //     list_id SERIAL PRIMARY KEY,
-//     user_id INTEGER REFERENCES users
-//     movies INTEGER ARRAY,
-//     shows INTEGER ARRAY,
+//     user_id INTEGER REFERENCES users,
+//     movies JSON ARRAY,
+//     shows JSON ARRAY
 // )
 

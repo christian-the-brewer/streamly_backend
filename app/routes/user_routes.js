@@ -58,11 +58,13 @@ router.post("/login", async (req, res, next) => {
                         expiresIn: "1d"
                     }
                 );
+                //grab user_id from reponse
+                const userId = user.rows[0].user_id;
                 const giveToken = await db.query(
                     "UPDATE users SET refresh_token = $1 WHERE email = $2", [refreshToken, email]
                 )
                 res.cookie("jwt", refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
-                res.status(201).json({accessToken});
+                res.status(201).json({accessToken, userId});
             } else res.status(401).json({message: "Invalid"})
         } else {
             res.status(401).json({message: "Invalid"})
