@@ -22,11 +22,11 @@ export const db = new Pool({
 //     language VARCHAR(2)
 // )
 
-//creates watch_list table
-// CREATE TABLE watch_list (
+// creates watch_list table
+// CREATE TABLE watch_lists (
 //     list_id SERIAL PRIMARY KEY,
 //     user_id INTEGER REFERENCES users,
-//     movies JSON ARRAY,
-//     shows JSON ARRAY
+//     movies TEXT ARRAY,
+//     shows TEXT ARRAY
 // )
 
