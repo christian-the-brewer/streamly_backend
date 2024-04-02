@@ -13,8 +13,23 @@ import watch_list_routes from "./app/routes/watch_list_routes.js";
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const whiteList = [
+    "https://localhost:5173",
+    "http://localhost:5173"
+]
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (whiteList.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    optionsSuccessStatus: 200
+}
+
 //middleware
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
@@ -24,6 +39,7 @@ app.use(shared_routes)
 app.use(tv_routes)
 app.use(person_routes);
 app.use(user_routes)
+// app.use(verifyJWT);
 app.use(watch_list_routes);
 
 app.listen(PORT, () => {

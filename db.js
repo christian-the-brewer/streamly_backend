@@ -18,8 +18,9 @@ export const db = new Pool({
 //     hashed_password TEXT NOT NULL,
 //     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
 //     refresh_token TEXT,
-//     region VARCHAR(2),
-//     language VARCHAR(2)
+//     roles INTEGER ARRAY,
+//     region VARCHAR(2) DEFAULT "US",
+//     language VARCHAR(2) DEFAULT "EN"
 // )
 
 // creates watch_list table
