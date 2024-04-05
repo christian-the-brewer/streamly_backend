@@ -1,8 +1,12 @@
 import jwt from "jsonwebtoken";
 
 const verifyJWT = (req, res, next) => {
+    console.log("verifying JWT")
     const authHeader = req.headers["authorization"];
-    if (!authHeader) return res.status(401);
+    if (!authHeader) {
+        console.log("no auth header")
+        return res.status(401);
+    }
     console.log(authHeader);
     const token = authHeader.split(" ")[1];
     jwt.verify(
@@ -11,6 +15,7 @@ const verifyJWT = (req, res, next) => {
         (err, decoded) => {
             if (err) return res.status(403);
             req.email = decoded.email;
+            console.log("decoded email: ", decoded.email);
             next();
         }
     );

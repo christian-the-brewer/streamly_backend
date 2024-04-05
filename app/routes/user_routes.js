@@ -35,7 +35,6 @@ router.post("/register", async (req, res) => {
             const newUser = await db.query(
                 "INSERT INTO users (email, hashed_password) VALUES ($1, $2) RETURNING" +
                 " *", [email, hashedPassword]);
-            console.log(newUser)
             //insert default user role
             const addRole = await db.query(
                 "UPDATE users SET roles = array_append(roles, 5) WHERE user_id = ($1)", [newUser.rows[0].user_id]);
@@ -56,7 +55,6 @@ router.post("/login", async (req, res, next) => {
         const user = await db.query(
             "SELECT * FROM users WHERE email = $1", [email]
         )
-        console.log(user);
         if (user.rowCount === 1) {
             const match = await bcrypt.compare(password, user.rows[0].hashed_password);
             if (match) {
@@ -82,7 +80,7 @@ router.post("/login", async (req, res, next) => {
                 const giveToken = await db.query(
                     "UPDATE users SET refresh_token = $1 WHERE email = $2", [refreshToken, email]
                 )
-                res.cookie("jwt", refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
+                res.cookie("jwt", refreshToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 24 * 60 * 60 * 1000});
                 res.status(201).json({accessToken, userId, roles});
             } else res.status(401).json({message: "Invalid"})
         } else {

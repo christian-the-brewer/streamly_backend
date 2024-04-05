@@ -8,7 +8,8 @@ import user_routes from "./app/routes/user_routes.js";
 import "dotenv/config"
 import verifyJWT from "./app/middleware/verifyJWT.js";
 import watch_list_routes from "./app/routes/watch_list_routes.js";
-
+import cookieParser from "cookie-parser";
+import refresh_routes from "./app/routes/refresh_routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -29,18 +30,20 @@ const corsOptions = {
 }
 
 //middleware
-// app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({extended: true}))
+app.use(cookieParser());
 
-
-app.use(movie_routes)
-app.use(shared_routes)
-app.use(tv_routes)
+app.use(movie_routes);
+app.use(shared_routes);
+app.use(tv_routes);
 app.use(person_routes);
-app.use(user_routes)
-// app.use(verifyJWT);
+app.use(user_routes);
+app.use(refresh_routes);
+app.use(verifyJWT);
 app.use(watch_list_routes);
+
 
 app.listen(PORT, () => {
     console.log(`server online on ${PORT}`)

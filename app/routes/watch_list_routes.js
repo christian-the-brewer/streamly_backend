@@ -1,13 +1,13 @@
 import express from "express";
 import {db} from "../../db.js";
 import jwt from "jsonwebtoken";
+import verifyJWT from "../middleware/verifyJWT.js";
 
 const router = express.Router();
 
 router.put("/watch_list", async (req, res) => {
     try {
         //TODO check access token
-
         //insert movie or show to user watchlist record
         const {userId, contentId, contentPoster, contentType} = req.body;
         const content = `${contentId} ${contentPoster}`;
