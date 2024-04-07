@@ -68,4 +68,27 @@ router.get("/watch_list/:id", async (req, res) => {
     }
 })
 
+router.delete("/watch_list", async (req, res) => {
+    const {userId} = req.body;
+    try {
+        //delete users watchlist
+        console.log("deleting user ", userId);
+        const deletedList = await db.query(
+            "DELETE FROM watch_lists WHERE user_id = $1 RETURNING *", [userId]);
+        console.log(deletedList);
+        res.status(200);
+    } catch (err) {
+        console.error(err.message);
+    }
+    //delete user record
+    try {
+        const deletedUser = await db.query(
+            "DELETE FROM users WHERE user_id = $1 RETURNING *", [userId]);
+        console.log(deletedUser);
+        res.status(200);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 export default router;
