@@ -11,8 +11,7 @@ const router = express.Router();
 router.get("/users", async (req, res) => {
     try {
         const users = await db.query("SELECT user_id, email FROM users");
-        console.log("users: ", users.rows);
-        console.log(users.rows[0].user_id)
+        console.log("getting users");
         res.status(201).json({users: users.rows});
     } catch (err) {
     console.error(err)}

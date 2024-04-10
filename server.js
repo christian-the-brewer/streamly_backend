@@ -8,6 +8,7 @@ import user_routes from "./app/routes/user_routes.js";
 import "dotenv/config"
 import verifyJWT from "./app/middleware/verifyJWT.js";
 import watch_list_routes from "./app/routes/watch_list_routes.js";
+import admin_routes from "./app/routes/admin_routes.js";
 import cookieParser from "cookie-parser";
 import refresh_routes from "./app/routes/refresh_routes.js";
 
@@ -43,6 +44,7 @@ app.use(user_routes);
 app.use(refresh_routes);
 app.use(verifyJWT);
 app.use(watch_list_routes);
+app.use(admin_routes);
 
 
 app.listen(PORT, () => {
