@@ -37,4 +37,13 @@ router.get("/refresh", async (req, res) => {
     }
 });
 
+router.post("logout", async (req, res) => {
+    try {
+        const cookies = req.cookies;
+        if (!cookies?.jwt) res.status(204)
+    }catch (err) {
+        console.error(err.message);
+    }
+});
+
 export default router;

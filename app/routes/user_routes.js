@@ -90,4 +90,13 @@ router.post("/login", async (req, res, next) => {
     }
 });
 
+//logout
+router.post("/logout", async (req, res) => {
+    try {
+
+    } catch (err) {
+        console.error(err.message)
+    }
+});
+
 export default router;
